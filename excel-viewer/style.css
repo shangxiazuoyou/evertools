@@ -1,0 +1,386 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+}
+
+.upload-section {
+    margin-bottom: 30px;
+}
+
+.upload-area {
+    position: relative;
+    border: 3px dashed #ddd;
+    border-radius: 10px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: #fafafa;
+}
+
+.upload-area:hover {
+    border-color: #007bff;
+    background: #f0f8ff;
+}
+
+.upload-area.dragover {
+    border-color: #007bff;
+    background: #e3f2fd;
+}
+
+.upload-text svg {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.upload-text p {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.format-info {
+    color: #999;
+    font-size: 14px !important;
+}
+
+#fileInput {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-list {
+    margin-bottom: 20px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.file-icon {
+    color: #28a745;
+    font-size: 20px;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #333;
+}
+
+.file-size {
+    color: #666;
+    font-size: 14px;
+}
+
+.remove-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.remove-btn:hover {
+    background: #c82333;
+}
+
+.data-display {
+    margin-top: 30px;
+}
+
+.table-controls {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    display: none;
+}
+
+.table-controls.show {
+    display: block;
+}
+
+.freeze-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.freeze-control label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.freeze-control input {
+    width: 80px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.freeze-control input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.freeze-control button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+#applyFreeze {
+    background: #007bff;
+    color: white;
+}
+
+#applyFreeze:hover {
+    background: #0056b3;
+}
+
+#clearFreeze {
+    background: #6c757d;
+    color: white;
+}
+
+#clearFreeze:hover {
+    background: #545b62;
+}
+
+.tabs {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    overflow-x: auto;
+}
+
+.tab {
+    padding: 10px 20px;
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-bottom: none;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.tab.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.tab:hover:not(.active) {
+    background: #e9ecef;
+}
+
+.table-container {
+    max-height: 600px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+}
+
+.placeholder {
+    padding: 50px;
+    text-align: center;
+    color: #666;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee;
+    height: 49px;
+    box-sizing: border-box;
+}
+
+.data-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.data-table .frozen-row {
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 5;
+    background: #fff !important;
+    border-bottom: 2px solid #007bff !important;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.15);
+}
+
+.data-table .frozen-row[data-row-index="0"] {
+    top: 49px !important;
+}
+
+.data-table .frozen-row:hover {
+    background: #f8f9fa !important;
+}
+
+.data-table .frozen-row td {
+    background: inherit;
+    border-bottom: 1px solid #007bff;
+}
+
+.data-table .frozen-row:last-of-type {
+    border-bottom: 3px solid #007bff !important;
+    box-shadow: 0 3px 6px rgba(0, 123, 255, 0.2);
+}
+
+.data-table tr:hover {
+    background: #f8f9fa;
+}
+
+.data-table td {
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+.error {
+    color: #dc3545;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+.success {
+    color: #155724;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    20% { opacity: 1; transform: translateY(0); }
+    80% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+.freeze-message {
+    animation: fadeInOut 2s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .upload-area {
+        padding: 30px 20px;
+    }
+    
+    .tabs {
+        flex-wrap: wrap;
+    }
+    
+    .tab {
+        flex: 1;
+        min-width: 120px;
+    }
+    
+    .table-container {
+        max-height: 400px;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px;
+        font-size: 14px;
+        height: 41px;
+    }
+    
+    .freeze-control {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .freeze-control input {
+        width: 60px;
+    }
+}
