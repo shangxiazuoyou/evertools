@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: redis-butler
+  thymeleaf:
+    cache: false
+    mode: HTML
+
+# Redis连接配置示例
+redis:
+  environments:
+    dev:
+      host: localhost
+      port: 6379
+      database: 0
+      password:
+      timeout: 2000ms
+    test:
+      host: test-redis.example.com
+      port: 6379
+      database: 1
+      password: test123
+      timeout: 2000ms
+    prod:
+      host: prod-redis.example.com
+      port: 6379
+      database: 0
+      password: prod123
+      timeout: 5000ms
+
+logging:
+  level:
+    com.redisbutler: DEBUG
+    io.lettuce: DEBUG
